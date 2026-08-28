@@ -1,0 +1,40 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"python.defaultInterpreterPath": "./.venv/Scripts/python.exe",
+		"python.terminal.activateEnvironment": true,
+		"python.terminal.activateEnvInCurrentTerminal": true,
+		"python.terminal.focusAfterLaunch": true,
+		"files.associations": {
+			"*.csv": "csv (semicolon)"
+		},
+		"python.analysis.extraPaths": [
+			"./"
+		]
+	},
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "Auto-install requirements on startup",
+				"type": "shell",
+				"command": "${workspaceFolder}/.venv/Scripts/python.exe",
+				"args": ["-m", "pip", "install", "-r", "requirements.txt"],
+				"runOptions": {
+					"runOn": "folderOpen"
+				},
+				"presentation": {
+					"echo": true,
+					"reveal": "always",
+					"focus": false,
+					"panel": "shared"
+				},
+				"problemMatcher": []
+			}
+		]
+	}
+}

@@ -1,0 +1,60 @@
+{
+    "_comment": "Payload layout per device/frame type. Matched via (protocol_mode, message_type, payload_count). protocol_mode and message_type take the enum names from channel_schema.py, never the numbers. Channel order = order of floats on the wire; csv_order controls the CSV column order. Optional valid_min/valid_max flag physically impossible values, which point at a mis-decoded frame.",
+    "profiles": [
+        {
+            "id": "legacy_ft7",
+            "device": "Resense FT-Sensor (Legacy, 28 byte)",
+            "protocol_mode": "legacy",
+            "message_type": "measurement",
+            "payload_count": 7,
+            "csv_order": ["fX", "fY", "fZ", "mX", "mY", "mZ", "Temperature"],
+            "channels": [
+                { "key": "fY", "label": "CH2", "unit": "mN", "role": "force", "tarable": true, "csv_column": "fY" },
+                { "key": "fX", "label": "CH1", "unit": "mN", "role": "force", "tarable": true, "csv_column": "fX" },
+                { "key": "mX", "label": "CH4", "unit": "mNm", "role": "torque", "tarable": true, "csv_column": "mX" },
+                { "key": "fZ", "label": "CH3", "unit": "mN", "role": "force", "tarable": true, "csv_column": "fZ" },
+                { "key": "mZ", "label": "CH6", "unit": "mNm", "role": "torque", "tarable": true, "csv_column": "mZ" },
+                { "key": "mY", "label": "CH5", "unit": "mNm", "role": "torque", "tarable": true, "csv_column": "mY" },
+                { "key": "temperature", "label": "Temp", "unit": "degC", "role": "temperature", "csv_column": "Temperature", "valid_min": -40, "valid_max": 300 }
+            ]
+        },
+        {
+            "id": "standard_ft7",
+            "device": "Resense FT-Sensor (Standard)",
+            "protocol_mode": "standard",
+            "message_type": "measurement",
+            "payload_count": 7,
+            "csv_order": ["fX", "fY", "fZ", "mX", "mY", "mZ", "Temperature"],
+            "channels": [
+                { "key": "fY", "label": "CH2", "unit": "mN", "role": "force", "tarable": true, "csv_column": "fY" },
+                { "key": "fX", "label": "CH1", "unit": "mN", "role": "force", "tarable": true, "csv_column": "fX" },
+                { "key": "mX", "label": "CH4", "unit": "mNm", "role": "torque", "tarable": true, "csv_column": "mX" },
+                { "key": "fZ", "label": "CH3", "unit": "mN", "role": "force", "tarable": true, "csv_column": "fZ" },
+                { "key": "mZ", "label": "CH6", "unit": "mNm", "role": "torque", "tarable": true, "csv_column": "mZ" },
+                { "key": "mY", "label": "CH5", "unit": "mNm", "role": "torque", "tarable": true, "csv_column": "mY" },
+                { "key": "temperature", "label": "Temp", "unit": "degC", "role": "temperature", "csv_column": "Temperature", "valid_min": -40, "valid_max": 300 }
+            ]
+        },
+        {
+            "id": "extended_ft11",
+            "device": "Resense FT-Sensor (Extended/Diagnostic)",
+            "protocol_mode": "extended",
+            "message_type": "diagnostic",
+            "payload_count": 11,
+            "csv_order": ["fX", "fY", "fZ", "mX", "mY", "mZ", "Temperature", "Current", "Voltage", "BoardTemperature", "BoardVoltage"],
+            "channels": [
+                { "key": "fY", "label": "CH2", "unit": "mN", "role": "force", "tarable": true, "csv_column": "fY" },
+                { "key": "fX", "label": "CH1", "unit": "mN", "role": "force", "tarable": true, "csv_column": "fX" },
+                { "key": "mX", "label": "CH4", "unit": "mNm", "role": "torque", "tarable": true, "csv_column": "mX" },
+                { "key": "fZ", "label": "CH3", "unit": "mN", "role": "force", "tarable": true, "csv_column": "fZ" },
+                { "key": "mZ", "label": "CH6", "unit": "mNm", "role": "torque", "tarable": true, "csv_column": "mZ" },
+                { "key": "mY", "label": "CH5", "unit": "mNm", "role": "torque", "tarable": true, "csv_column": "mY" },
+                { "key": "temperature", "label": "Temp", "unit": "degC", "role": "temperature", "csv_column": "Temperature", "valid_min": -40, "valid_max": 300 },
+                { "key": "current", "label": "Current", "unit": "A", "role": "current", "csv_column": "Current" },
+                { "key": "raw_adc_voltage", "label": "Voltage", "unit": "V", "role": "raw", "csv_column": "Voltage" },
+                { "key": "board_temperature", "label": "Board Temp", "unit": "degC", "role": "temperature", "csv_column": "BoardTemperature", "valid_min": -40, "valid_max": 300 },
+                { "key": "board_voltage", "label": "Board Voltage", "unit": "V", "role": "voltage", "csv_column": "BoardVoltage" }
+            ]
+        }
+    ]
+}

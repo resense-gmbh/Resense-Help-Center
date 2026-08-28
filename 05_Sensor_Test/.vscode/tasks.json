@@ -1,0 +1,86 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Setup Workspace",
+            "type": "shell",
+            "command": "powershell.exe",
+            "args": [
+                "-c", 
+                "Write-Host \"Setting up workspace...\" -ForegroundColor Green; if (!(Test-Path \".venv\")) { Write-Host \"Creating virtual environment...\" -ForegroundColor Yellow; py -m venv .venv; Write-Host \"Virtual environment created!\" -ForegroundColor Green } else { Write-Host \"Virtual environment already exists.\" -ForegroundColor Blue }; Write-Host \"Installing requirements...\" -ForegroundColor Yellow; .\\.venv\\Scripts\\python.exe -m pip install -r requirements.txt; Write-Host \"Workspace setup complete!\" -ForegroundColor Green"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Create Virtual Environment",
+            "type": "shell",
+            "command": "powershell.exe",
+            "args": [
+                "-c", 
+                "if (!(Test-Path \".venv\")) { py -m venv .venv; Write-Host \"Virtual environment created successfully!\" } else { Write-Host \"Virtual environment already exists.\" }"
+            ],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Install Requirements",
+            "type": "shell",
+            "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+            "args": ["-m", "pip", "install", "-r", "requirements.txt"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "dependsOn": "Create Virtual Environment"
+        },
+        {
+            "label": "Generate Requirements",
+            "type": "shell",
+            "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+            "args": ["-m", "pip", "freeze"],
+            "options": {
+                "shell": {
+                    "executable": "powershell.exe",
+                    "args": ["-c"]
+                }
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always"
+            }
+        },
+        {
+            "label": "Update Requirements",
+            "type": "shell",
+            "command": "powershell.exe",
+            "args": ["-c", "& \"${workspaceFolder}\\.venv\\Scripts\\python.exe\" -m pip freeze | Out-File -FilePath requirements.txt -Encoding utf8"],
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always"
+            }
+        }
+    ]
+}
